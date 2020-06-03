@@ -55,9 +55,12 @@ def distance(x,y):
 distance([0,0], [1,1])
 
 % Exercise 8
+
 def in_circle(x, origin = (0,0)):
 eturn distance(x,origin) < 1
 in_circle([1,1], [0,0])
+
+
 % Exercise 9
 
 R = 10000
