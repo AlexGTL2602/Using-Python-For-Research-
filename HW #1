@@ -1,0 +1,74 @@
+% Exercise 1 
+
+import string 
+alphabet = string.ascii_letters
+sentence = "Jim quickly realized that the beautiful gowns are expensive"
+alphabet
+
+% Exercise 2 
+
+sentence = "Jim quickly realized that the beautiful gowns are expensive"
+alphabet = string.ascii_letters
+count_letters = {}
+
+for letters in sentence:
+    if letters in alphabet:
+        if letters in count_letters:
+            count_letters[letters] += 1
+        else: 
+            count_letters[letters] = 1
+count_letters
+
+% Exercise 3 
+count_letters = {}
+
+def counter(string):
+    for letters in string: 
+        if letters in alphabet: 
+            if letters in count_letters: 
+                count_letters[letters] += 1
+            else:
+                count_letters[letters] = 1
+    return count_letters
+    
+% Exercise 4
+counter(address)
+
+% Exercise 5
+import math 
+math.pi/4 
+
+% Exercise 6
+import random
+
+random.seed(1) #This line is fixed
+
+def rand():
+    x = random.uniform(-1,1)
+    return x
+rand()
+% Exercise 7
+
+def distance(x,y):
+    dist = math.sqrt((y[0]-x[0])**2 + (y[1]-x[1])**2)
+    return dist
+distance([0,0], [1,1])
+
+% Exercise 8
+def in_circle(x, origin = (0,0)):
+eturn distance(x,origin) < 1
+in_circle([1,1], [0,0])
+% Exercise 9
+
+R = 10000
+x = []
+inside = []
+
+for i in range(R): 
+    points = [rand(),rand()]
+    x.append(points)
+    
+for j in x: 
+    inside = [in_circle(j)]
+    
+print(sum(inside)/R)
