@@ -1,0 +1,149 @@
+# Exercise 1
+
+import numpy as np 
+import time, sys
+
+# write your code here!
+def create_board():
+    return np.zeros([3,3])
+board = create_board()
+board
+
+# Exercise #2
+
+board 
+position = (0,0); 
+player = 1 
+
+# write your code here!
+def place(board, player,position): 
+    board[position] = player
+    return board
+    
+place(board,player,position)
+
+#Exercise #3
+
+# write your code here!
+def possibilities(board):
+    free_spots= np.where(board==0)
+    return list(zip(free_spots[0],free_spots[1]))
+
+possibilities(board)
+
+#Exercise #4
+
+import random 
+random.seed(1)
+
+# write your code here!
+def random_place(board, player): 
+    free_spots = possibilities(board)
+    if len(free_spots) > 0:
+        new_choice = random.choice(free_spots)
+        board[new_choice] = player 
+        return board 
+random_place(board,2)
+
+#Exercise #5
+
+board = create_board()
+
+# write your code here
+for i in range(3):
+    for player in [1, 2]:
+        random_place(board, player) 
+board
+
+#Exercise #6
+
+def row_win(board, player):
+    r_c = np.shape(board)
+    row = r_c[0]; 
+    col = r_c[1]; 
+    for ii in range(row):
+        if np.all(board[ii,:]) == player: 
+            return True
+        else: 
+            return False
+row_win(board, player)
+
+#Exercise #7
+
+def col_win(board, player):
+    r_c = np.shape(board)
+    row = r_c[0]; 
+    col = r_c[1]; 
+    for ii in range(row):
+        for jj in range(col): 
+            if np.all(board[:,jj]) == player:  
+                return True
+            else: 
+                return False
+col_win(board, player)
+
+#Exercise #8
+
+board[1,1] = 2
+
+def diag_win(board, player):
+    if np.all(np.diag(board)==player):
+        return True
+    else:
+        return False
+diag_win(board, 2)
+
+#Exercise #9
+
+def evaluate(board):
+    winner = 0
+    for player in [1, 2]:
+        # Check if `row_win`, `col_win`, or `diag_win` apply.  if so, store `player` as `winner`.
+        if row_win(board, player) or col_win(board, player) or diag_win(board, player):
+            winner = player
+    if np.all(board != 0) and winner == 0:
+        winner = -1
+    return winner
+evaluate(board)
+
+#Exercise #10
+
+random.seed(1) 
+
+def play_game():
+    board = create_board()
+    while True:
+        for player in [1, 2]:
+            random_place(board, player)
+            result = evaluate(board)
+            if result != 0:
+                return result             
+iterations = 1000
+result = []
+for i in range(iterations):
+    result.append(play_game())      
+    
+from collections import Counter
+total = Counter(result)
+total
+
+#Exercise #11
+
+def play_strategic_game():
+    board, winner = create_board(), 0
+    board[1,1] = 1
+    while winner == 0:
+        for player in [2,1]:
+            board = random_place(board, player)
+            winner = evaluate(board)
+            if winner != 0:
+                break
+    return winner    
+
+iterations = 1000
+result2 = []
+for i in range(iterations):
+    result2.append(play_strategic_game()) 
+
+total2 = Counter(result2)
+total2
