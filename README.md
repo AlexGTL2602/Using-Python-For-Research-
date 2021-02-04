@@ -1,6 +1,5 @@
 # Using-Python-For-Research-
-Hey guys, I would like to share some of the code developed in the course mentioned above.  You can take it through EdX platform.  
-
+The following scripts provide the material covered in the course "Using Python For Research" offers by Hardvard University through Edx platform.
 
 ## Syllabus
 
